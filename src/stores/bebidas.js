@@ -1,14 +1,17 @@
 import { defineStore } from "pinia";
 import { ref, reactive, onMounted } from "vue";
 import APIServices from "../services/APIServices";
+import { useModalStore } from "./modal";
 
 export const useBebidasStore = defineStore("bebidas", () => {
+  const modal = useModalStore();
   const categories = ref([]);
   const search = reactive({
     name: "",
     category: "",
   });
   const cocktails = ref([]);
+  const cocktail = ref({});
   onMounted(async function () {
     const {
       data: { drinks },
@@ -21,10 +24,20 @@ export const useBebidasStore = defineStore("bebidas", () => {
     } = await APIServices.getCocktail(search);
     cocktails.value = drinks;
   }
+  async function getCocktailById(id) {
+    const {
+      data: { drinks },
+    } = await APIServices.getCocktailById(id);
+    cocktail.value = drinks[0];
+    modal.toggleModal();
+  }
+
   return {
     categories,
     search,
-    getCocktail,
+    cocktail,
     cocktails,
+    getCocktail,
+    getCocktailById,
   };
 });

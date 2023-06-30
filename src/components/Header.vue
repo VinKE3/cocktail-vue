@@ -4,7 +4,6 @@ import { computed } from "vue";
 import { useBebidasStore } from "../stores/bebidas";
 const route = useRoute();
 const store = useBebidasStore();
-console.log(store);
 const isInicio = computed(() => route.name === "inicio");
 const handleSubmit = () => {
   store.getCocktail();

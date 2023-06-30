@@ -6,4 +6,7 @@ export default {
   getCocktail({ category, name }) {
     return api.get(`/filter.php?c=${category}&i=${name}`);
   },
+  getCocktailById(id) {
+    return api.get(`/lookup.php?iid=${id}`);
+  },
 };

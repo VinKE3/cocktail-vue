@@ -8,8 +8,10 @@ import {
 } from "@headlessui/vue";
 import { useModalStore } from "../stores/modal";
 import { useBebidasStore } from "../stores/bebidas";
+import { useFavoritosStore } from "../stores/favoritos";
 const modalStore = useModalStore();
 const storeBebidas = useBebidasStore();
+const favoritosStore = useFavoritosStore();
 
 const formatearIngredientes = () => {
   const ingredientesDiv = document.createElement("DIV");
@@ -71,6 +73,7 @@ const formatearIngredientes = () => {
                   :<img
                     :src="storeBebidas.cocktail.strDrinkThumb"
                     :alt="'Imagen de ' + storeBebidas.cocktail.strDrink"
+                    class="mx-auto w-96"
                   />
                   <DialogTitle
                     as="h3"
@@ -78,6 +81,15 @@ const formatearIngredientes = () => {
                     >Ingredientes y Cantidades</DialogTitle
                   >
                   <div v-html="formatearIngredientes().outerHTML"></div>
+
+                  <DialogTitle
+                    as="h3"
+                    class="text-gray-900 text-4xl font-bold text-center my-5"
+                    >Instrucciones</DialogTitle
+                  >
+                  <p class="text-lg">
+                    {{ storeBebidas.cocktail.strInstructions }}
+                  </p>
                 </div>
               </div>
               <div class="mt-5 sm:mt-6 flex justify-between gap-4">
@@ -87,6 +99,13 @@ const formatearIngredientes = () => {
                   @click="modalStore.toggleModal"
                 >
                   Cerrar
+                </button>
+                <button
+                  type="button"
+                  class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm"
+                  @click="favoritosStore.handleClickFavoritos()"
+                >
+                  Agregar a Favoritos
                 </button>
               </div>
             </DialogPanel>

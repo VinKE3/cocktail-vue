@@ -23,24 +23,33 @@ export const useFavoritosStore = defineStore("favoritos", () => {
   function sincronizarLocalStorage() {
     localStorage.setItem("favoritos", JSON.stringify(favoritos.value));
   }
-  function existeFavorito(id) {
+  function existeFavorito() {
     const favoritoLocalStorage =
       JSON.parse(localStorage.getItem("favoritos")) ?? [];
-    return favoritoLocalStorage.some((favorito) => favorito.idDrink === id);
+    return favoritoLocalStorage.some(
+      (favorito) => favorito.idDrink === bebidas.cocktail.idDrink
+    );
   }
   function handleClickFavoritos() {
-    console.log(bebidas.cocktail);
-    if (existeFavorito(bebidas.cocktail.idDrink)) {
-      alert("Ya existe en favoritos");
+    if (existeFavorito()) {
+      eliminarFavorito();
+      alert("Se ha eliminado de favoritos");
     } else {
       favoritos.value.push(bebidas.cocktail);
-      modal.toggleModal(false);
+      alert("Se ha agregado a favoritos");
     }
+    modal.toggleModal(false);
+  }
+  function eliminarFavorito() {
+    favoritos.value = favoritos.value.filter(
+      (favorito) => favorito.idDrink !== bebidas.cocktail.idDrink
+    );
   }
 
   return {
     handleClickFavoritos,
     favoritos,
     existeFavorito,
+    eliminarFavorito,
   };
 });

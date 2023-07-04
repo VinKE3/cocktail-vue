@@ -17,9 +17,15 @@ export const useModalStore = defineStore("modal", () => {
       ? "Eliminar de favoritos"
       : "Agregar a favoritos";
   });
+  const claseBoton = computed(() => {
+    return favoritos.existeFavorito(bebidas.cocktail.idDrink)
+      ? "bg-red-500 hover:bg-red-600"
+      : "bg-green-500 hover:bg-green-600";
+  });
   return {
     modal,
     toggleModal,
     textoBoton,
+    claseBoton,
   };
 });

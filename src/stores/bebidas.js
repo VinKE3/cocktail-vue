@@ -32,7 +32,15 @@ export const useBebidasStore = defineStore("bebidas", () => {
     modal.toggleModal();
   }
 
-  const nobebidas = computed(() => cocktails.value.length === 0);
+  const nobebidas = computed(
+    () => !cocktails.value || cocktails.value.length === 0
+  );
+
+  const filtroBusquedaPorNombre = computed(() => {
+    return cocktails.value.filter((cocktail) =>
+      cocktail.strDrink.toLowerCase().includes(search.name.toLowerCase())
+    );
+  });
 
   return {
     categories,
@@ -42,5 +50,6 @@ export const useBebidasStore = defineStore("bebidas", () => {
     getCocktail,
     getCocktailById,
     nobebidas,
+    filtroBusquedaPorNombre,
   };
 });

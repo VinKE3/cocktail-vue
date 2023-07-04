@@ -9,7 +9,7 @@ const bebidasStore = useBebidasStore();
     v-if="bebidasStore.nobebidas"
     class="text-center uppercase mt-10 font-extrabold text-orange-500"
   >
-    No hay bebidas
+    No hay recetas todavia
   </p>
   <div v-else class="text-center">
     <h1 class="text-6xl font-extrabold text-center text-orange-500">

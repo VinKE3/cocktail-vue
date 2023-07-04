@@ -2,6 +2,8 @@ import { defineStore } from "pinia";
 import { useBebidasStore } from "./bebidas.js";
 import { useModalStore } from "./modal.js";
 import { ref, watch, onMounted } from "vue";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 export const useFavoritosStore = defineStore("favoritos", () => {
   const bebidas = useBebidasStore();
@@ -33,10 +35,14 @@ export const useFavoritosStore = defineStore("favoritos", () => {
   function handleClickFavoritos() {
     if (existeFavorito()) {
       eliminarFavorito();
-      alert("Se ha eliminado de favoritos");
+      toast.success("Se ha eliminado de favoritos", {
+        position: "top-right",
+      });
     } else {
       favoritos.value.push(bebidas.cocktail);
-      alert("Se ha agregado a favoritos");
+      toast.success("Se ha agregado a favoritos", {
+        position: "top-right",
+      });
     }
     modal.toggleModal(false);
   }

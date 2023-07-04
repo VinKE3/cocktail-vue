@@ -2,10 +2,16 @@
 import { RouterLink, useRoute } from "vue-router";
 import { computed } from "vue";
 import { useBebidasStore } from "../stores/bebidas";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 const route = useRoute();
 const store = useBebidasStore();
 const isInicio = computed(() => route.name === "inicio");
 const handleSubmit = () => {
+  if (Object.values(store.search).includes("")) {
+    toast.error("Ambos campos son obligatorios");
+    return;
+  }
   store.getCocktail();
 };
 </script>

@@ -18,15 +18,15 @@ const handleSubmit = () => {
             <img class="w-32" src="/public/img/logo.svg" />
           </RouterLink>
         </div>
-        <nav>
+        <nav class="text-white">
           <RouterLink
-            class="text-white uppercase font-bold text-lg mr-6 hover:text-orange-500 transition duration-300 ease-in-out"
+            class="uppercase font-bold text-lg mr-6 hover:text-orange-500 transition duration-300 ease-in-out"
             :to="{ name: 'inicio' }"
             active-class="text-orange-500"
             >Inicio</RouterLink
           >
           <RouterLink
-            class="text-white uppercase font-bold text-lg mr-6 hover:text-orange-500 transition duration-300 ease-in-out"
+            class="uppercase font-bold text-lg mr-6 hover:text-orange-500 transition duration-300 ease-in-out"
             :to="{ name: 'favoritos' }"
             active-class="text-orange-500"
             >Favoritos</RouterLink
